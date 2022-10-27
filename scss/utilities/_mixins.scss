@@ -1,0 +1,21 @@
+@mixin col($properties){
+    @each $bg_col, $flex_basis in $bgcolor_basis{
+        $i: index(($bgcolor_basis), ($bg_col $flex_basis));// get index of each keys value in the map
+            @if $properties=="flex-basis"{
+                .col-#{$i}{
+                    flex-basis: $flex_basis;
+                }
+            }@else if $properties=="background-color"{
+                &.col-#{$i}{
+                    background-color: $bg_col;
+                } 
+            }@else {
+                    @warn "col or theme_col must be 'background-color' or be left blank !";
+                }
+            }
+}
+@mixin theme_col($properties: null){
+    .theme{
+        @include col($properties);
+        }
+}
